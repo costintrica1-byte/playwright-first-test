@@ -4,7 +4,7 @@ test('saucedemo', async ({ page }) => {
   // 1. Navigate to the page
   await page.goto('https://www.saucedemo.com/');
 
-  // 2. Expect a title "to contain" a substring.
+  // 2. Log in.
 await expect(page).toHaveTitle(/Swag Labs/);
 await page.getByRole('textbox', { name: 'Username'}).fill('standard_user');
 await page.getByRole('textbox', { name: 'Password' }).fill('secret_sauce');
