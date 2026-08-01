@@ -61,5 +61,54 @@ test('saucedemo', async ({ page }) => {
   const errorlogin = await page.getByText('Epic sadface');
   if (errorlogin)
     await page.waitForTimeout(1500);
+  await page.getByRole('textbox', { name: 'Username' }).clear();
+  await page.getByRole('textbox', { name: 'Password' }).clear();
+await page.waitForTimeout(1500);
+  await page.getByRole('textbox', { name: 'Username' }).fill('standard_user');
+  await page.getByRole('textbox', { name: 'Password' }).fill('secret_sauce');
+await page.waitForTimeout(1500);
+if (login)
+  await login.click();
+await page.waitForTimeout(500);
+await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+const addbackpack = await page.waitForSelector('#add-to-cart-sauce-labs-backpack');
+if (addbackpack)
+  await addbackpack.click();
+  await page.waitForTimeout(1500);
+// if (addcart)
+//     await addcart.click();
+const addjacket = await page.waitForSelector('#add-to-cart-sauce-labs-fleece-jacket');
+if (addjacket)
+  await addjacket.click();
+  await page.waitForTimeout(1500);
+const cart = await page.waitForSelector('.shopping_cart_link');
+if (cart)
+  await cart.click();
+await page.waitForTimeout(1500);
+const continueshopping = await page.waitForSelector('#continue-shopping');
+if (continueshopping)
+  await continueshopping.click();
+const addbikelight = await page.waitForSelector('#add-to-cart-sauce-labs-bike-light');
+if (addbikelight)
+  await addbikelight.click();
+// if (checkoutpage)
+//   await checkoutpage.click();
+const checkoutbutton = await page.waitForSelector('#shopping_cart_container');
+if (checkoutbutton)
+    await checkoutbutton.click();
+  await page.getByText('Checkout').click();
+  await expect(page).toHaveURL('https://www.saucedemo.com/checkout-step-one.html');
+  await page.waitForTimeout(1500);
+  await page.getByRole('textbox', { name: 'First Name' }).fill('Tester');
+  await page.getByRole('textbox', { name: 'Last Name' }).fill('Swag');
+  await page.getByRole('textbox', { name: 'Zip/Postal Code' }).fill('031845');
+  await page.waitForTimeout(1500);
+  await page.getByRole('button', { name: 'Continue' }).click();
+  await page.waitForTimeout(1500);
+  await page.getByText('Shipping Information:');
+  const checkoutpagetwo = await page.waitForSelector('#finish')
+  if (checkoutpagetwo)
+    await checkoutpagetwo.click();
+  await page.waitForTimeout(1500);
   //page.close();
 });
